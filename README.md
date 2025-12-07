@@ -1,7 +1,7 @@
 # SQL-Project-3-Products-and-Sales-Analysis
 SQL projects analysing products and sales performance with KPIs, trends, and insights.
 
-Question-1: show the productwise total sales of delivered items without discount
+### Question-1: show the productwise total sales of delivered items without discount
 
                     select
                     	  quantity,
@@ -18,6 +18,10 @@ Question-1: show the productwise total sales of delivered items without discount
                         unit_price,
                         discount,
                         status;
+  ### Output:    
+
+
+  ### Description
 
 Question-2: Please show the total sales of delivered products without discount
 
