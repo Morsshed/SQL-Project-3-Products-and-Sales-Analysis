@@ -32,9 +32,12 @@ This query calculates total sales revenue for only delivered items by multiplyin
                       left join orders 
                         on orders.order_id=order_items.order_id
                         where status = "Delivered";
+ ### Output:
+![Advanced DB SQL 2 Screenshot](https://github.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/blob/main/QueryImages/Advanced%20DB%20SQL%202.png?raw=true)
+ ### Description
+This query calculates the total revenue generated from delivered orders by summing quantity × unit_price without considering discounts. It joins orders and order_items tables and filters only "Delivered" status records to return final sales value.
 
-
-Question-3: what is the average price of the products?
+## Question-3: what is the average price of the products?
                       
                       select
                       	round(avg(unit_price),0) as AVG_Price
