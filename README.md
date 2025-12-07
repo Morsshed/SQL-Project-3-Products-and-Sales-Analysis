@@ -49,16 +49,20 @@ This query calculates the total revenue generated from delivered orders by summi
 
 ## Question-4: Please show the products with their unit_prices which have exceeded the average price of the products (SUB-QUERY AND JOINS)    
 
-                  SELECT 
-                      unit_price
-                  FROM
-                      order_items
-                  WHERE
-                      unit_price > (SELECT 
-                              ROUND(AVG(unit_price), 0) AS AVG_Price
-                          FROM
-                              order_items)
-                  order by unit_price desc;
+                       SELECT 
+                    distinct(product_name) as Product_Name,
+                    order_items.unit_price
+                FROM
+                    products
+                    LEFT JOIN order_items
+                        ON products.product_id = order_items.product_id
+                WHERE
+                    order_items.unit_price > (
+                        SELECT ROUND(AVG(unit_price), 0)
+                        FROM order_items
+                    )
+                ORDER BY
+                    order_items.unit_price DESC;
  ### Output:    
 
 
