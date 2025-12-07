@@ -1,7 +1,7 @@
 # SQL-Project-3-Products-and-Sales-Analysis
 SQL projects analysing products and sales performance with KPIs, trends, and insights.
 
-## Question-1: show the productwise total sales of delivered items without discount
+## Question-1: show the productwise total sales of 'delivered' items without discount
 
                     select
                     	  quantity,
@@ -24,7 +24,7 @@ SQL projects analysing products and sales performance with KPIs, trends, and ins
   ### Description
 This query calculates total sales revenue for only delivered items by multiplying quantity × unit_price, excluding discount impact. Orders are joined with order details using order_id, filtered by status "Delivered", and grouped to get aggregated sales output. This helps in understanding actual revenue generated from completed orders.
 
-## Question-2: Please show the total sales of delivered products without discount
+## Question-2: Please show the total sales of 'delivered' products without discount
 
                     select
                     	sum(quantity* unit_price) total_sales
@@ -118,21 +118,21 @@ This query calculates the total revenue generated from delivered orders by summi
 
 ##### step-4: Combined Query
                             
-                            select 
-                                concat(employees.first_name, " ", employees.last_name) as Full_name,
-                                employees.salary,
-                                base_table.AVG_salary,
-                                departments.department_name
-                            from(
-                                select
-                            	      *,
-                            	      avg(salary) over (partition by department_id) AVG_salary
-                                from employees) as base_table
-                                    left join employees
-                                      on employees.department_id=base_table.department_id
-                                left join departments
-                                      on departments.department_id=base_table.department_id
-                                  where AVG_salary > employees.salary;
+                              select 
+                              distinct(concat(employees.first_name, " ", employees.last_name)) as Full_name,
+                              round(employees.salary) as employee_salary,
+                              round(base_table.AVG_salary) as avg_alary,
+                              departments.department_name
+                              from(
+                              select
+                              	*,
+                              	avg(salary) over (partition by department_id) AVG_salary
+                                  from employees) as base_table
+                                  left join employees
+                                  on employees.department_id=base_table.department_id
+                                  left join departments
+                                  on departments.department_id=base_table.department_id
+                              where AVG_salary > employees.salary;
  ### Output:    
 
 
