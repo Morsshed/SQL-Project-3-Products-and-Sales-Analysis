@@ -140,19 +140,19 @@ This query calculates the total revenue generated from delivered orders by summi
   
 ## Question-7 : find the employees whose salary is higher than his/her department's average salary (Repeated-5) with COMMON TABLE EXPRESSION (CTEs)
                             
-                            with CTE1 as(
-                            select 
-                            	concat(employees.first_name, " ", employees.last_name) as Full_name,
-                            	employees.salary,
-                            	departments.department_name,
-                            	avg(salary) over (partition by employees.department_id) AVG_salary
-                            from employees
-                                left join departments
-                                   on employees.department_id= departments.department_id)
-                                
-                                select * from CTE1
-                                where salary > AVG_salary;
-    
+                               with CTE1 as(
+                              select 
+                              	concat(employees.first_name, " ", employees.last_name) as Full_name,
+                              	round(employees.salary) as salary,
+                              	departments.department_name,
+                              	round(avg(salary) over (partition by employees.department_id)) as AVG_salary
+                              from employees
+                                  left join departments
+                                  on employees.department_id= departments.department_id)
+                                  
+                                  select * from CTE1
+                                  where salary > AVG_salary;
+                                  
  ### Output:    
 
   ### Description  
