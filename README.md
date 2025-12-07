@@ -1,7 +1,7 @@
 # SQL-Project-3-Products-and-Sales-Analysis
 SQL projects analysing products and sales performance with KPIs, trends, and insights.
 
-### Question-1: show the productwise total sales of delivered items without discount
+## Question-1: show the productwise total sales of delivered items without discount
 
                     select
                     	  quantity,
@@ -19,11 +19,12 @@ SQL projects analysing products and sales performance with KPIs, trends, and ins
                         discount,
                         status;
   ### Output:    
-
+![Advanced DB SQL1 Screenshot](https://github.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/blob/main/Advanced%20DB%20SQL1.png?raw=true)
 
   ### Description
+This query calculates total sales revenue for only delivered items by multiplying quantity × unit_price, excluding discount impact. Orders are joined with order details using order_id, filtered by status "Delivered", and grouped to get aggregated sales output. This helps in understanding actual revenue generated from completed orders.
 
-Question-2: Please show the total sales of delivered products without discount
+## Question-2: Please show the total sales of delivered products without discount
 
                     select
                     	sum(quantity* unit_price) total_sales
