@@ -42,9 +42,12 @@ This query calculates the total revenue generated from delivered orders by summi
                       select
                       	round(avg(unit_price),0) as AVG_Price
                       from order_items;
-                          
+  ### Output:    
 
-Question-4: Please show the products with their unit_prices which have exceeded the average price of the products (SUB-QUERY AND JOINS)    
+
+  ### Description                         
+
+## Question-4: Please show the products with their unit_prices which have exceeded the average price of the products (SUB-QUERY AND JOINS)    
 
                   SELECT 
                       unit_price
@@ -56,8 +59,12 @@ Question-4: Please show the products with their unit_prices which have exceeded 
                           FROM
                               order_items)
                   order by unit_price desc;
+ ### Output:    
 
-Question-5: find employees whose salary is higher than average salary (HR Salary)
+
+  ### Description  
+  
+## Question-5: find employees whose salary is higher than average salary (HR Salary)
 
                                           Step-1: Average of Salary
 
@@ -70,15 +77,18 @@ Question-5: find employees whose salary is higher than average salary (HR Salary
                      from employees
                          where salary > (select round(avg(salary),0) from employees)
                          order by salary desc;
+  ### Output:    
+
+  ### Description  
+  
+ ## Question-6: find the employees whose salary is higher than his/her department's average salary (HR Salary)
  
- Question-6: find the employees whose salary is higher than his/her department's average salary (HR Salary)
- 
-                                          step-1: employees and departments table
+  ##### step-1: employees and departments table
                                           
                         select * from employees;
                         select * from departments;
 
-                                          step 2: joins
+  ##### step 2: joins
                                           
                                 select 
                                 	  employees.employee_id,
@@ -90,7 +100,7 @@ Question-5: find employees whose salary is higher than average salary (HR Salary
                                    ON employees.department_id = departments.department_id
                                 ;
                                 
-                                       step 3: departments' average salary
+##### step 3: departments' average salary
                                 
                                 select 
                                 	  -- employees.employee_id,
@@ -102,7 +112,7 @@ Question-5: find employees whose salary is higher than average salary (HR Salary
                                          ON employees.department_id = departments.department_id
                                     group by departments.department_name;
 
-                                    step-4: Combined Query
+##### step-4: Combined Query
                             
                             select 
                                 concat(employees.first_name, " ", employees.last_name) as Full_name,
@@ -119,8 +129,12 @@ Question-5: find employees whose salary is higher than average salary (HR Salary
                                 left join departments
                                       on departments.department_id=base_table.department_id
                                   where AVG_salary > employees.salary;
+ ### Output:    
 
-Question-6 : find the employees whose salary is higher than his/her department's average salary (Repeated-5) with COMMON TABLE EXPRESSION (CTEs)
+
+  ### Description  
+  
+## Question-7 : find the employees whose salary is higher than his/her department's average salary (Repeated-5) with COMMON TABLE EXPRESSION (CTEs)
                             
                             with CTE1 as(
                             select 
@@ -135,8 +149,11 @@ Question-6 : find the employees whose salary is higher than his/her department's
                                 select * from CTE1
                                 where salary > AVG_salary;
     
+ ### Output:    
+
+  ### Description  
   
-Question- 7: top selling product category in each month
+## Question- 8: top selling product category in each month
 
                       select * from products;
                       select * from categories;
@@ -174,7 +191,7 @@ Question- 7: top selling product category in each month
                               where category_rank = 1;   
                           
 
-Question-8: Calculate the running total of delivered items ( monthly total orders and total sales)
+## Question-9: Calculate the running total of delivered items ( monthly total orders and total sales)
     
 
                       select
@@ -198,8 +215,11 @@ Question-8: Calculate the running total of delivered items ( monthly total order
                       	order_year,
                       	order_month
                       ;
-    
-Question-9: Calculate the running total ( 3 months moving average)
+  ### Output:    
+
+  ### Description  
+  
+## Question-10: Calculate the running total ( 3 months moving average)
 
                     select
                     	  year(orders.order_date) as order_year,
@@ -222,8 +242,12 @@ Question-9: Calculate the running total ( 3 months moving average)
                     	order_year,
                     	order_month
                     ;
-    
-Question-10: compare before vs after total orders, total sales and 3 months moving average and where cutoff date is '2023-01-01'
+ ### Output:    
+
+
+  ### Description  
+  
+## Question-11: compare before vs after total orders, total sales and 3 months moving average and where cutoff date is '2023-01-01'
                     
                     select 
                     	  categories.category_name,
@@ -262,8 +286,11 @@ Question-10: compare before vs after total orders, total sales and 3 months movi
                     				    products.product_id,
                     				    products.product_name;
                 
+ ### Output:    
 
-Question-11: Running total with percentage of total
+  ### Description  
+  
+## Question-12: Running total with percentage of total
                     
                     select
                     	  year(orders.order_date) as order_year,
@@ -297,8 +324,11 @@ Question-11: Running total with percentage of total
                     	    year(orders.order_date)
                     	    -- order_month
                     ;
+ ### Output:    
 
-Question-12: Compare actual sales against targets with running total
+  ### Description  
+  
+## Question-13: Compare actual sales against targets with running total
                      
                     SELECT 
                         st.target_year AS year,
@@ -357,8 +387,11 @@ Question-12: Compare actual sales against targets with running total
                     	r.region_name,
                         year, 
                         month;
+ ### Output:    
 
-Question-13: Month over growth rate in sales
+  ### Description
+  
+## Question-14: Month over growth rate in sales
 
                     SELECT 
                         YEAR(o.order_date) AS year,
@@ -436,9 +469,11 @@ Question-13: Month over growth rate in sales
                     		year(orders.order_date),
                     		Month(orders.order_date)
                     ;
-    
+ ### Output:    
 
-Question-14: Ranking Functions
+  ### Description    
+
+## Question-15: Ranking Functions
 
                     SELECT 
                         p.product_id,
@@ -475,8 +510,11 @@ Question-14: Ranking Functions
                         group by
                     				Month(orders.order_date)
                     ;
+ ### Output:    
 
-Question-15: Customer Segmentation
+  ### Description
+  
+## Question-16: Customer Segmentation
 
                                                 SELECT 
                                                     c.customer_id,
@@ -508,3 +546,8 @@ Question-15: Customer Segmentation
                                                     group by
                                                 				Month(orders.order_date)
                                                 ;
+
+ ### Output:    
+
+  ### Description
+  
