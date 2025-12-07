@@ -195,7 +195,7 @@ This query calculates the total revenue generated from delivered orders by summi
                               where category_rank = 1;   
                           
 
-## Question-9: Calculate the running total of delivered items ( monthly total orders and total sales)
+## Question-9: Calculate the running total of delivered items (monthly total orders and total sales)
     
 
                       select
@@ -223,7 +223,7 @@ This query calculates the total revenue generated from delivered orders by summi
 
   ### Description  
   
-## Question-10: Calculate the running total ( 3 months moving average)
+## Question-10: Calculate the running total (3 months moving average)
 
                     select
                     	  year(orders.order_date) as order_year,
@@ -294,7 +294,7 @@ This query calculates the total revenue generated from delivered orders by summi
 
   ### Description  
   
-## Question-12: Running total with percentage of total
+## Question-12: Running total with percentage of total sales
                     
                     select
                     	  year(orders.order_date) as order_year,
@@ -395,7 +395,7 @@ This query calculates the total revenue generated from delivered orders by summi
 
   ### Description
   
-## Question-14: Month over growth rate in sales
+## Question-14: Month over Month (Mom) growth rate in sales
 
                     SELECT 
                         YEAR(o.order_date) AS year,
@@ -434,45 +434,6 @@ This query calculates the total revenue generated from delivered orders by summi
                     ORDER BY 
                         year, month;
                         
-                    -- MoM Growth in Sales ( self-practice)
-                    
-                    select 
-                    	  year(orders.order_date) as Order_Year,
-                        Month(orders.order_date) as Order_Month,
-                    	  round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2) AS monthly_sales,
-                        coalesce(lag (round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2)) 
-                    		    over(
-                    		  	    partition by year(orders.order_date)
-                                order by  year(orders.order_date)),0) as Previous_Month_sales,
-                                
-                    	(round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2))
-                        - coalesce((lag (round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2)) 
-                    		over(
-                    			partition by year(orders.order_date)
-                                order by  year(orders.order_date))),0) as Sales_change,
-                      case when
-                    	lag (round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2)) 
-                    		over(
-                    			partition by year(orders.order_date)
-                                order by  year(orders.order_date)) = 0 then null
-                    	else
-                    	round(((round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2))
-                        - coalesce((lag (round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2)) 
-                    		over(
-                    			partition by year(orders.order_date)
-                                order by  year(orders.order_date))),0)) / coalesce((lag (round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2)) 
-                    		over(
-                    			partition by year(orders.order_date)
-                                order by  year(orders.order_date))),0)* 100,2) 
-                    	end as growth_rate
-                                
-                    from orders
-                    	left join order_items
-                    		on orders.order_id=order_items.order_id
-                        group by
-                    		year(orders.order_date),
-                    		Month(orders.order_date)
-                    ;
  ### Output:    
 
   ### Description    
@@ -494,26 +455,6 @@ This query calculates the total revenue generated from delivered orders by summi
                     ORDER BY 
                         c.category_name, p.unit_price DESC;
                         
-                        -- Self_praactice 
-                        
-                        select
-                        Month(orders.order_date) as Order_month,
-                    	round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2) AS monthly_sales,
-                        rank () 
-                    		over
-                    			(order by round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2) desc) as 'rank',
-                    	dense_rank ()
-                    		over 
-                    			(order by round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2) desc) as 'dense_rank',
-                    	row_number ()
-                    		over 
-                    			(order by round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2) desc) as 'row_number'
-                    from orders
-                    	left join order_items
-                    		on orders.order_id=order_items.order_id
-                        group by
-                    				Month(orders.order_date)
-                    ;
  ### Output:    
 
   ### Description
@@ -535,21 +476,6 @@ This query calculates the total revenue generated from delivered orders by summi
                                                     c.customer_id, c.company_name
                                                 ORDER BY 
                                                     total_spent DESC;
-                                                    
-                                                    -- (self_practice)
-                                                    
-                                                 select
-                                                    Month(orders.order_date) as Order_month,
-                                                	  round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2) AS monthly_sales,
-                                                   ntile(4) 
-                                                	      over( 
-                                                		        order by  round(SUM(order_items.unit_price * order_items.quantity * (1 - order_items.discount)),2)) as quartile_sales
-                                                from orders
-                                                	left join order_items
-                                                		on orders.order_id=order_items.order_id
-                                                    group by
-                                                				Month(orders.order_date)
-                                                ;
 
  ### Output:    
 
