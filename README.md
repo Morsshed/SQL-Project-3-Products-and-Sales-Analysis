@@ -70,11 +70,11 @@ This query calculates the total revenue generated from delivered orders by summi
   
 ## Question-5: find employees whose salary is higher than average salary (HR Salary)
 
-                                          Step-1: Average of Salary
+  ##### Step-1: Average of Salary
 
                      select round(avg(salary),0) from employees;
 
-                                          Step-2: Sub-Query
+  ##### Step-2: Sub-Query
                      
                      select 
                            *
