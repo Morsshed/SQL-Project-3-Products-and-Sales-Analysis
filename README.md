@@ -137,10 +137,9 @@ Retrieves unique products with a unit price higher than the average price across
                                   on departments.department_id=base_table.department_id
                               where AVG_salary > employees.salary;
  ### Output:    
-
-
+![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%206.png)
   ### Description  
-  
+
 ## Question-7 : find the employees whose salary is higher than his/her department's average salary (Repeated-5) with COMMON TABLE EXPRESSION (CTEs)
                             
                                with CTE1 as(
