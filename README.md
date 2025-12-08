@@ -43,9 +43,10 @@ This query calculates the total revenue generated from delivered orders by summi
                       	round(avg(unit_price),0) as AVG_Price
                       from order_items;
   ### Output:    
-
+![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL3.png)
 
   ### Description                         
+Calculates the average unit price from the order_items table and rounds it to the nearest whole number.
 
 ## Question-4: Please show the products with their unit_prices which have exceeded the average price of the products (SUB-QUERY AND JOINS)    
 
