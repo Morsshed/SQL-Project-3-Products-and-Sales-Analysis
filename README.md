@@ -159,9 +159,10 @@ Using window functions (AVG() OVER (PARTITION BY ...)) to calculate department-w
                                   where salary > AVG_salary;
                                   
  ### Output:    
-
+![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%207.png)
   ### Description  
-  
+Common Table Expressions (CTEs): Organizes intermediate results for readability and reusability. Window Functions: Uses AVG() OVER (PARTITION BY department_id) to calculate department-wise average salaries. JOINs: Combines employee data with department names via LEFT JOIN.String Concatenation: Combines first_name and last_name to form Full_name. Conditional Filtering: Uses WHERE salary > AVG_salary to filter only employees earning above their department average.Rounding Numeric Values: Formats salaries and averages using ROUND() for clarity.  
+
 ## Question- 8: top selling product category in each month
 
                       select * from products;
