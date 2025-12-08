@@ -414,7 +414,7 @@ Aggregation: Uses COUNT(DISTINCT order_id) for monthly order counts and SUM() fo
   ### Description
 Joins: Combines sales_targets, regions, and aggregated actual sales from orders, order_items, and customers. Subqueries / Derived Tables: Calculates monthly actual sales per region using a subquery. Aggregation: Uses SUM() to calculate monthly sales and cumulative totals. Window Functions: SUM() OVER (PARTITION BY region_id, target_year ORDER BY target_month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) for cumulative totals. COALESCE(): Handles months with no sales by replacing NULL with 0. Conditional Filtering: Filters for a specific year (target_year = 2023) and optionally by region. Variance Calculation: Computes cumulative variance between actual sales and target. Date Functions: Extracts YEAR() and MONTH() from order dates for aggregation.Ordering: Orders results by region, year, and month for chronological reporting.
 
-## Question-14: Month over Month (Mom) growth rate in sales
+## Question-14: Month over Month (MoM) growth rate in sales
 
                     SELECT 
                         YEAR(o.order_date) AS year,
@@ -454,8 +454,10 @@ Joins: Combines sales_targets, regions, and aggregated actual sales from orders,
                         year, month;
                         
  ### Output:    
+![SQL Query Screenshot – SQL 14](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2014.png)
 
   ### Description    
+Aggregation: Uses SUM() to calculate monthly sales totals. Window Functions: LAG() retrieves the previous month’s sales for comparison. Growth Calculations: Computes absolute sales change and percentage growth. Conditional Logic: Handles division by zero using CASE WHEN to avoid errors for the first month or zero previous sales. Joins: Combines orders with order_items to calculate actual sales. Filtering: Only includes orders with status = 'Delivered'. Date Functions: Extracts YEAR() and MONTH() from order_date for monthly aggregation. Grouping and Ordering: Groups by year and month and orders results chronologically.
 
 ## Question-15: Ranking Functions
 
