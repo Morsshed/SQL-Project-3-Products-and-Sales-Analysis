@@ -304,9 +304,12 @@ Aggregation: Uses COUNT(DISTINCT order_id) for monthly order counts and SUM() fo
                     				    products.product_name;
                 
  ### Output:    
-
-  ### Description  
+![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2011.png)
+  ### SQL Skills Applied
   
+Conditional Aggregation: Uses CASE WHEN inside SUM() and COUNT() to separate values before and after a specific date. Joins: Combines order_items, products, categories, and orders tables to enrich sales data.
+Aggregation & Grouping: Groups by category_name, product_id, and product_name to calculate totals per product. Distinct Counts: Counts unique orders with COUNT(DISTINCT ...). Date Filtering: Uses a fixed cutoff date ('2023-01-01') for comparisons. Rounding / Formatting: Applies ROUND() for readable total sales values. Ordering: Orders results by category and product ID for clarity. 
+
 ## Question-12: Running total with percentage of total sales
                     
                     select
