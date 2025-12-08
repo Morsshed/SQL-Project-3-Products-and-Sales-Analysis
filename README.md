@@ -345,9 +345,11 @@ Aggregation & Grouping: Groups by category_name, product_id, and product_name to
                     	    -- order_month
                     ;
  ### Output:    
-
-  ### Description  
+![SQL Query Screenshot – SQL 12](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2012.png)
+  ### SQL Skills Applied:
   
+Aggregation: Uses COUNT(DISTINCT order_id) for monthly order counts and SUM() for total sales. Window Functions:Computes running totals using SUM() OVER (PARTITION BY year ORDER BY month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW). Computes annual totals using SUM() OVER (PARTITION BY year). Percentage Calculations: Computes the percentage of the cumulative monthly sales relative to the annual total. Joins: Combines order_items with orders using LEFT JOIN. Date Functions: Extracts YEAR() and MONTH() from order dates. Rounding / Formatting: Uses ROUND() to make totals and percentages readable. Grouping and Ordering: Groups by year and month and orders results chronologically.
+
 ## Question-13: Compare actual sales against targets with running total
                      
                     SELECT 
