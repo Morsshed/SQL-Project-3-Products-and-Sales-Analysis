@@ -1,7 +1,8 @@
 # SQL-Project-3-Products-and-Sales-Analysis
 SQL projects analysing products and sales performance with KPIs, trends, and insights.
 
-## Question-1: show the productwise total sales of 'delivered' items without discount
+## Question-1: 
+Show the productwise total sales of 'delivered' items without discount
 
                     select
                     	  quantity,
@@ -24,7 +25,8 @@ SQL projects analysing products and sales performance with KPIs, trends, and ins
   ### Description
 This query calculates total sales revenue for only delivered items by multiplying quantity × unit_price, excluding discount impact. Orders are joined with order details using order_id, filtered by status "Delivered", and grouped to get aggregated sales output. This helps in understanding actual revenue generated from completed orders.
 
-## Question-2: Please show the total sales of 'delivered' products without discount
+## Question-2: 
+Please show the total sales of 'delivered' products without discount
 
                     select
                     	sum(quantity* unit_price) total_sales
@@ -37,7 +39,8 @@ This query calculates total sales revenue for only delivered items by multiplyin
  ### Description
 This query calculates the total revenue generated from delivered orders by summing quantity × unit_price without considering discounts. It joins orders and order_items tables and filters only "Delivered" status records to return final sales value.
 
-## Question-3: what is the average price of the products?
+## Question-3: 
+What is the average price of the products?
                       
                       select
                       	round(avg(unit_price),0) as AVG_Price
@@ -48,7 +51,8 @@ This query calculates the total revenue generated from delivered orders by summi
   ### Description                         
 Calculates the average unit price from the order_items table and rounds it to the nearest whole number.
 
-## Question-4: Please show the products with their unit_prices which have exceeded the average price of the products (SUB-QUERY AND JOINS)    
+## Question-4: 
+Please show the products with their unit_prices which have exceeded the average price of the products (SUB-QUERY AND JOINS)    
 
                        SELECT 
                     distinct(product_name) as Product_Name,
@@ -70,13 +74,14 @@ Calculates the average unit price from the order_items table and rounds it to th
   ### Description  
 Retrieves unique products with a unit price higher than the average price across all orders, sorted from highest to lowest.
 
-## Question-5: find employees whose salary is higher than average salary (HR Salary)
+## Question-5: 
+Find employees whose salary is higher than average salary (HR Salary)
 
-  ##### Step-1: Average of Salary
+  ##### Step-i: Average of Salary
 
                      select round(avg(salary),0) from employees;
 
-  ##### Step-2: Sub-Query
+  ##### Step-ii: Sub-Query
                      
                      select 
                            *
@@ -88,14 +93,15 @@ Retrieves unique products with a unit price higher than the average price across
   ### Description  
  Counts how many orders were placed per customer and displays the result sorted by total orders in descending order.
  
- ## Question-6: find the employees whose salary is higher than his/her department's average salary (HR Salary)
+ ## Question-6: 
+ Find the employees whose salary is higher than his/her department's average salary (HR Salary)
  
-  ##### step-1: employees and departments table
+  ##### step-i: employees and departments table
                                           
                         select * from employees;
                         select * from departments;
 
-  ##### step 2: joins
+  ##### step ii: joins
                                           
                                 select 
                                 	  employees.employee_id,
@@ -107,7 +113,7 @@ Retrieves unique products with a unit price higher than the average price across
                                    ON employees.department_id = departments.department_id
                                 ;
                                 
-##### step 3: departments' average salary
+##### step ii: departments' average salary
                                 
                                 select 
                                 	  -- employees.employee_id,
@@ -119,7 +125,7 @@ Retrieves unique products with a unit price higher than the average price across
                                          ON employees.department_id = departments.department_id
                                     group by departments.department_name;
 
-##### step-4: Combined Query
+##### step-iv: Combined Query
                             
                               select 
                               distinct(concat(employees.first_name, " ", employees.last_name)) as Full_name,
@@ -138,12 +144,12 @@ Retrieves unique products with a unit price higher than the average price across
                               where AVG_salary > employees.salary;
  ### Output:    
 ![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%206.png)
-  ### Description  
-This query demonstrates advanced SQL skills including:
+  ### SQL Skills Applied:
 
 Using window functions (AVG() OVER (PARTITION BY ...)) to calculate department-wise average salaries. Applying subqueries / derived tables to organize intermediate results. Performing JOINs (LEFT JOIN) to combine employee and department data. Using string concatenation to create full names (CONCAT(first_name, " ", last_name)). Applying aggregation awareness with DISTINCT to remove duplicates.Using conditional filtering in the WHERE clause to compare salaries with averages. Formatting numeric results with ROUND() for clarity.
 
-## Question-7 : find the employees whose salary is higher than his/her department's average salary (Repeated-5) with COMMON TABLE EXPRESSION (CTEs)
+## Question-7 : 
+Find the employees whose salary is higher than his/her department's average salary (Repeated-5) with COMMON TABLE EXPRESSION (CTEs)
                             
                                with CTE1 as(
                               select 
@@ -160,10 +166,12 @@ Using window functions (AVG() OVER (PARTITION BY ...)) to calculate department-w
                                   
  ### Output:    
 ![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%207.png)
-  ### Description  
+  ### SQL Skills Applied:
+  
 Common Table Expressions (CTEs): Organizes intermediate results for readability and reusability. Window Functions: Uses AVG() OVER (PARTITION BY department_id) to calculate department-wise average salaries. JOINs: Combines employee data with department names via LEFT JOIN.String Concatenation: Combines first_name and last_name to form Full_name. Conditional Filtering: Uses WHERE salary > AVG_salary to filter only employees earning above their department average.Rounding Numeric Values: Formats salaries and averages using ROUND() for clarity.  
 
-## Question- 8: Top selling product category in each month
+## Question- 8: 
+Top selling product category in each month
 
                       select * from products;
                       select * from categories;
@@ -199,12 +207,13 @@ Common Table Expressions (CTEs): Organizes intermediate results for readability 
                           from Monthly_sales)
                                 select * from ranking_month
                               where category_rank = 1;   
-### Output
+### Output:
  ![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%208.png)
 ### SQL Skills Applied:
 Common Table Expressions (CTEs): Organizes intermediate results into monthly_sales and ranking_month for readability. JOINs: Combines data from order_items, products, categories, and orders tables. Aggregation: Uses SUM(quantity) to compute total sales per category per month. Window Functions: Uses RANK() OVER (PARTITION BY order_year, order_month ORDER BY total_sales DESC) to rank categories by monthly sales. Grouping: Groups results by year, month, and category. Filtering: Selects only the top-ranked category per month (category_rank = 1). Date Functions: Extracts YEAR() and MONTH() from order dates for monthly aggregation.
 
-## Question-9: Calculate the running total of delivered items (monthly total orders and total sales)
+## Question-9: 
+Calculate the running total of delivered items (monthly total orders and total sales)
     
 
                       select
@@ -233,7 +242,8 @@ Common Table Expressions (CTEs): Organizes intermediate results into monthly_sal
   ### SQL Skills Applied: 
 Aggregation: Uses COUNT(DISTINCT order_id) to get monthly order counts and SUM() for total sales. Window Functions: Computes a running total with SUM() OVER (PARTITION BY year ORDER BY month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW). Joins: Combines order_items with orders via LEFT JOIN. Conditional Filtering: Only includes orders with status = 'Delivered'. Date Functions: Extracts YEAR() and MONTH() from order_date for monthly aggregation. Rounding / Numeric Formatting: Uses ROUND() to make totals easier to read. Grouping and Ordering: Groups by year and month, and orders results chronologically.
 
-## Question-10: Calculate the running total (3 months moving average)
+## Question-10: 
+Calculate the running total (3 months moving average)
 
                     select
                     	  year(orders.order_date) as order_year,
@@ -260,11 +270,12 @@ Aggregation: Uses COUNT(DISTINCT order_id) to get monthly order counts and SUM()
 
 ![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2010.png)
 
-  ### SQL Skills Applied
+  ### SQL Skills Applied:
   
 Aggregation: Uses COUNT(DISTINCT order_id) for monthly order counts and SUM() for total sales. Window Functions: Computes a moving average with AVG() OVER (ORDER BY month, year ROWS BETWEEN 2 PRECEDING AND CURRENT ROW). Joins: Combines order_items with orders via LEFT JOIN. Conditional Filtering: Only includes orders with status = 'Delivered'. Date Functions: Extracts YEAR() and MONTH() from order_date for monthly aggregation. Rounding / Numeric Formatting: Uses ROUND() for readable totals. Grouping and Ordering: Groups by year and month, and orders results chronologically.  
 
-## Question-11: compare before vs after total orders, total sales and 3 months moving average and where cutoff date is '2023-01-01'
+## Question-11: 
+Compare before vs after total orders, total sales and 3 months moving average and where cutoff date is '2023-01-01'
                     
                     select 
                     	  categories.category_name,
@@ -305,12 +316,13 @@ Aggregation: Uses COUNT(DISTINCT order_id) for monthly order counts and SUM() fo
                 
  ### Output:    
 ![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2011.png)
-  ### SQL Skills Applied
+  ### SQL Skills Applied:
   
 Conditional Aggregation: Uses CASE WHEN inside SUM() and COUNT() to separate values before and after a specific date. Joins: Combines order_items, products, categories, and orders tables to enrich sales data.
 Aggregation & Grouping: Groups by category_name, product_id, and product_name to calculate totals per product. Distinct Counts: Counts unique orders with COUNT(DISTINCT ...). Date Filtering: Uses a fixed cutoff date ('2023-01-01') for comparisons. Rounding / Formatting: Applies ROUND() for readable total sales values. Ordering: Orders results by category and product ID for clarity. 
 
-## Question-12: Running total with percentage of total sales
+## Question-12: 
+Running total with percentage of total sales
                     
                     select
                     	  year(orders.order_date) as order_year,
@@ -350,7 +362,8 @@ Aggregation & Grouping: Groups by category_name, product_id, and product_name to
   
 Aggregation: Uses COUNT(DISTINCT order_id) for monthly order counts and SUM() for total sales. Window Functions:Computes running totals using SUM() OVER (PARTITION BY year ORDER BY month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW). Computes annual totals using SUM() OVER (PARTITION BY year). Percentage Calculations: Computes the percentage of the cumulative monthly sales relative to the annual total. Joins: Combines order_items with orders using LEFT JOIN. Date Functions: Extracts YEAR() and MONTH() from order dates. Rounding / Formatting: Uses ROUND() to make totals and percentages readable. Grouping and Ordering: Groups by year and month and orders results chronologically.
 
-## Question-13: Compare actual sales against targets with running total
+## Question-13: 
+Compare actual sales against targets with running total
                      
                     SELECT 
                         st.target_year AS year,
@@ -411,10 +424,11 @@ Aggregation: Uses COUNT(DISTINCT order_id) for monthly order counts and SUM() fo
                         month;
  ### Output:    
 ![SQL Query Screenshot – SQL 13](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2013.png)
-  ### Description
+  ### SQL Skills Applied:
 Joins: Combines sales_targets, regions, and aggregated actual sales from orders, order_items, and customers. Subqueries / Derived Tables: Calculates monthly actual sales per region using a subquery. Aggregation: Uses SUM() to calculate monthly sales and cumulative totals. Window Functions: SUM() OVER (PARTITION BY region_id, target_year ORDER BY target_month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) for cumulative totals. COALESCE(): Handles months with no sales by replacing NULL with 0. Conditional Filtering: Filters for a specific year (target_year = 2023) and optionally by region. Variance Calculation: Computes cumulative variance between actual sales and target. Date Functions: Extracts YEAR() and MONTH() from order dates for aggregation.Ordering: Orders results by region, year, and month for chronological reporting.
 
-## Question-14: Month over Month (MoM) growth rate in sales
+## Question-14: 
+Month over Month (MoM) growth rate in sales
 
                     SELECT 
                         YEAR(o.order_date) AS year,
@@ -456,10 +470,11 @@ Joins: Combines sales_targets, regions, and aggregated actual sales from orders,
  ### Output:    
 ![SQL Query Screenshot – SQL 14](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2014.png)
 
-  ### Description    
+  ### SQL Skills Apllied:    
 Aggregation: Uses SUM() to calculate monthly sales totals. Window Functions: LAG() retrieves the previous month’s sales for comparison. Growth Calculations: Computes absolute sales change and percentage growth. Conditional Logic: Handles division by zero using CASE WHEN to avoid errors for the first month or zero previous sales. Joins: Combines orders with order_items to calculate actual sales. Filtering: Only includes orders with status = 'Delivered'. Date Functions: Extracts YEAR() and MONTH() from order_date for monthly aggregation. Grouping and Ordering: Groups by year and month and orders results chronologically.
 
-## Question-15: Ranking Functions
+## Question-15: 
+Ranking Functions
 
                     SELECT 
                         p.product_id,
@@ -478,10 +493,11 @@ Aggregation: Uses SUM() to calculate monthly sales totals. Window Functions: LAG
                         
  ### Output:    
 ![SQL Query Screenshot – SQL 15](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2015.png)
-  ### Description
+  ### SQL Skills Applied:
  Window Functions for Ranking: ROW_NUMBER() OVER(PARTITION BY category_id ORDER BY unit_price DESC) assigns a unique sequential number to products per category. RANK() OVER(PARTITION BY category_id ORDER BY unit_price DESC) handles ties by giving the same rank to products with the same price and leaving gaps in ranks. DENSE_RANK() OVER(PARTITION BY category_id ORDER BY unit_price DESC) handles ties without leaving gaps in ranks. Joins: Combines products with categories to retrieve category names. Partitioning: Uses PARTITION BY category_id to rank products within each category independently. Ordering: Sorts results by category name and descending price. 
  
-## Question-16: Customer Segmentation
+## Question-16: 
+Customer Segmentation
 
                                                 SELECT 
                                                     c.customer_id,
@@ -500,6 +516,6 @@ Aggregation: Uses SUM() to calculate monthly sales totals. Window Functions: LAG
                                                     total_spent DESC;
 
  ### Output:    
-
-  ### Description
-  
+![SQL Query Screenshot – SQL 16](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2016.png)
+  ### SQL Skills Applied:
+Joins: Combines customers, orders, and order_items to calculate total spending per customer. Aggregation: Uses SUM() to calculate total spending per customer. Window Functions: NTILE(4) OVER (ORDER BY SUM(...) DESC) divides customers into four equal-sized quartiles based on total spending. Grouping: Groups by customer_id and company_name to calculate spending per customer.Ordering: Sorts customers by total_spent in descending order to easily identify top spenders.  
