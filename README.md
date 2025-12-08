@@ -477,9 +477,10 @@ Aggregation: Uses SUM() to calculate monthly sales totals. Window Functions: LAG
                         c.category_name, p.unit_price DESC;
                         
  ### Output:    
-
+![SQL Query Screenshot – SQL 15](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2015.png)
   ### Description
-  
+ Window Functions for Ranking: ROW_NUMBER() OVER(PARTITION BY category_id ORDER BY unit_price DESC) assigns a unique sequential number to products per category. RANK() OVER(PARTITION BY category_id ORDER BY unit_price DESC) handles ties by giving the same rank to products with the same price and leaving gaps in ranks. DENSE_RANK() OVER(PARTITION BY category_id ORDER BY unit_price DESC) handles ties without leaving gaps in ranks. Joins: Combines products with categories to retrieve category names. Partitioning: Uses PARTITION BY category_id to rank products within each category independently. Ordering: Sorts results by category name and descending price. 
+ 
 ## Question-16: Customer Segmentation
 
                                                 SELECT 
