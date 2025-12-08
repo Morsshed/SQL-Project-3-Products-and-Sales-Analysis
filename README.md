@@ -65,10 +65,11 @@ Calculates the average unit price from the order_items table and rounds it to th
                 ORDER BY
                     order_items.unit_price DESC;
  ### Output:    
-
+![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%204.png)
 
   ### Description  
-  
+Retrieves unique products with a unit price higher than the average price across all orders, sorted from highest to lowest.
+
 ## Question-5: find employees whose salary is higher than average salary (HR Salary)
 
   ##### Step-1: Average of Salary
