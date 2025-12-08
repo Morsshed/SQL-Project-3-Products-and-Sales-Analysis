@@ -139,6 +139,9 @@ Retrieves unique products with a unit price higher than the average price across
  ### Output:    
 ![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%206.png)
   ### Description  
+This query demonstrates advanced SQL skills including:
+
+Using window functions (AVG() OVER (PARTITION BY ...)) to calculate department-wise average salaries. Applying subqueries / derived tables to organize intermediate results. Performing JOINs (LEFT JOIN) to combine employee and department data. Using string concatenation to create full names (CONCAT(first_name, " ", last_name)). Applying aggregation awareness with DISTINCT to remove duplicates.Using conditional filtering in the WHERE clause to compare salaries with averages. Formatting numeric results with ROUND() for clarity.
 
 ## Question-7 : find the employees whose salary is higher than his/her department's average salary (Repeated-5) with COMMON TABLE EXPRESSION (CTEs)
                             
