@@ -258,9 +258,12 @@ Aggregation: Uses COUNT(DISTINCT order_id) to get monthly order counts and SUM()
                     ;
  ### Output:    
 
+![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2010.png)
 
-  ### Description  
+  ### SQL Skills Applied
   
+Aggregation: Uses COUNT(DISTINCT order_id) for monthly order counts and SUM() for total sales. Window Functions: Computes a moving average with AVG() OVER (ORDER BY month, year ROWS BETWEEN 2 PRECEDING AND CURRENT ROW). Joins: Combines order_items with orders via LEFT JOIN. Conditional Filtering: Only includes orders with status = 'Delivered'. Date Functions: Extracts YEAR() and MONTH() from order_date for monthly aggregation. Rounding / Numeric Formatting: Uses ROUND() for readable totals. Grouping and Ordering: Groups by year and month, and orders results chronologically.  
+
 ## Question-11: compare before vs after total orders, total sales and 3 months moving average and where cutoff date is '2023-01-01'
                     
                     select 
