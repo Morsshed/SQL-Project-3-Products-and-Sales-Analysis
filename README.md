@@ -163,7 +163,7 @@ Using window functions (AVG() OVER (PARTITION BY ...)) to calculate department-w
   ### Description  
 Common Table Expressions (CTEs): Organizes intermediate results for readability and reusability. Window Functions: Uses AVG() OVER (PARTITION BY department_id) to calculate department-wise average salaries. JOINs: Combines employee data with department names via LEFT JOIN.String Concatenation: Combines first_name and last_name to form Full_name. Conditional Filtering: Uses WHERE salary > AVG_salary to filter only employees earning above their department average.Rounding Numeric Values: Formats salaries and averages using ROUND() for clarity.  
 
-## Question- 8: top selling product category in each month
+## Question- 8: Top selling product category in each month
 
                       select * from products;
                       select * from categories;
@@ -199,7 +199,10 @@ Common Table Expressions (CTEs): Organizes intermediate results for readability 
                           from Monthly_sales)
                                 select * from ranking_month
                               where category_rank = 1;   
-                          
+### Output
+ ![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%208.png)
+### SQL Skills Applied:
+Common Table Expressions (CTEs): Organizes intermediate results into monthly_sales and ranking_month for readability. JOINs: Combines data from order_items, products, categories, and orders tables. Aggregation: Uses SUM(quantity) to compute total sales per category per month. Window Functions: Uses RANK() OVER (PARTITION BY order_year, order_month ORDER BY total_sales DESC) to rank categories by monthly sales. Grouping: Groups results by year, month, and category. Filtering: Selects only the top-ranked category per month (category_rank = 1). Date Functions: Extracts YEAR() and MONTH() from order dates for monthly aggregation.
 
 ## Question-9: Calculate the running total of delivered items (monthly total orders and total sales)
     
