@@ -84,9 +84,10 @@ Retrieves unique products with a unit price higher than the average price across
                          where salary > (select round(avg(salary),0) from employees)
                          order by salary desc;
   ### Output:    
-
+![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%205.png)
   ### Description  
-  
+ Counts how many orders were placed per customer and displays the result sorted by total orders in descending order.
+ 
  ## Question-6: find the employees whose salary is higher than his/her department's average salary (HR Salary)
  
   ##### step-1: employees and departments table
