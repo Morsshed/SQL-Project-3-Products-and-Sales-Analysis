@@ -229,9 +229,10 @@ Common Table Expressions (CTEs): Organizes intermediate results into monthly_sal
                       	order_month
                       ;
   ### Output:    
+![SQL Query Screenshot](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%209.png)
+  ### SQL Skills Applied: 
+Aggregation: Uses COUNT(DISTINCT order_id) to get monthly order counts and SUM() for total sales. Window Functions: Computes a running total with SUM() OVER (PARTITION BY year ORDER BY month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW). Joins: Combines order_items with orders via LEFT JOIN. Conditional Filtering: Only includes orders with status = 'Delivered'. Date Functions: Extracts YEAR() and MONTH() from order_date for monthly aggregation. Rounding / Numeric Formatting: Uses ROUND() to make totals easier to read. Grouping and Ordering: Groups by year and month, and orders results chronologically.
 
-  ### Description  
-  
 ## Question-10: Calculate the running total (3 months moving average)
 
                     select
