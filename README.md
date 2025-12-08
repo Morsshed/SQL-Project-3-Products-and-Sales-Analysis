@@ -410,9 +410,10 @@ Aggregation: Uses COUNT(DISTINCT order_id) for monthly order counts and SUM() fo
                         year, 
                         month;
  ### Output:    
-
+![SQL Query Screenshot – SQL 13](https://raw.githubusercontent.com/Morsshed/SQL-Project-3-Products-and-Sales-Analysis/main/QueryImages/SQL%2013.png)
   ### Description
-  
+Joins: Combines sales_targets, regions, and aggregated actual sales from orders, order_items, and customers. Subqueries / Derived Tables: Calculates monthly actual sales per region using a subquery. Aggregation: Uses SUM() to calculate monthly sales and cumulative totals. Window Functions: SUM() OVER (PARTITION BY region_id, target_year ORDER BY target_month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) for cumulative totals. COALESCE(): Handles months with no sales by replacing NULL with 0. Conditional Filtering: Filters for a specific year (target_year = 2023) and optionally by region. Variance Calculation: Computes cumulative variance between actual sales and target. Date Functions: Extracts YEAR() and MONTH() from order dates for aggregation.Ordering: Orders results by region, year, and month for chronological reporting.
+
 ## Question-14: Month over Month (Mom) growth rate in sales
 
                     SELECT 
